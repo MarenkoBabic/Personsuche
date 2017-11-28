@@ -5,7 +5,6 @@ namespace PersonenSuchen
     using System.Collections.Generic;
     using System.Linq;
 
-    enum Haarfarbe { Rot, Blau, Grün, Blond, Schwarz, Braun }
 
     class Program
     {
@@ -22,7 +21,7 @@ namespace PersonenSuchen
             do
             {
                 // Läuft die Liste durch mit den erzeugen Personen und zeigt sie an 
-                foreach( var item in rn.PersonList )
+                foreach( String item in rn.PersonList )
                 {
                     Console.WriteLine( item );
                 }
@@ -38,7 +37,6 @@ namespace PersonenSuchen
 
                 Console.WriteLine("\n\n");
             } while( !string.IsNullOrWhiteSpace( searchPerson ) );
-            Console.Read();
         }
     }
 }

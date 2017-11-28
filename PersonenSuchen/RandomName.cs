@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace PersonenSuchen
 {
+    enum Haarfarbe {rot,blau,grün,weiß}
     public class RandomName
     {
         #region property
@@ -34,19 +35,21 @@ namespace PersonenSuchen
             this.date = Date;
             PersonList = new List<string>();
         }
-        public void PersonGenerator( int anzahl)
+        public void PersonGenerator( int anzahl )
         {
             List<string> firstNameList = new List<string>() { "Josef", "Sepp", "Hans", "Andi", "Peter", "Robert", "Marenko", "Patrick", "Thomas" };
             List<string> lastNameList = new List<string>() { "Prethaler", "Pichler", "Eiweck", "Wolfrath", "Ratzenböck", "Babic", "Grewe", "Gajar" };
             Random rnd = new Random();
+            var Haarfarbe = Enum.GetValues( typeof( Haarfarbe ) );
 
             for( int i = 0; i < anzahl; i++ )
             {
-                FirstName = firstNameList.OrderBy( x => rnd.Next() ).First();
-                LastName = lastNameList.OrderBy( x => rnd.Next() ).First();
-                Date = RandomDate();
-                string Person = FirstName + " " + LastName + " " + Date.ToString( "dd.MM.yyyy" );
-                PersonList.Add(Person);
+                string firstName = firstNameList.OrderBy( x => rnd.Next() ).First();
+                string lastName = lastNameList.OrderBy( x => rnd.Next() ).First();
+                DateTime date = RandomDate();
+                var farbe = (Haarfarbe)Haarfarbe.GetValue( rnd.Next( Haarfarbe.Length ) );
+                string Person = firstName + " " + lastName + " " + date.ToString( "dd.MM.yyyy" ) +" " + farbe;
+                PersonList.Add( Person );
             }
         }
 
