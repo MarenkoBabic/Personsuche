@@ -11,18 +11,34 @@ namespace PersonenSuchen
     {
         static void Main( string[] args )
         {
-            Console.WriteLine( "Guten Tag" );
+            string searchPerson;
             Console.WriteLine( "Wieviele Personen Personen wollen sie erstellen" );
             bool eingabe = int.TryParse( Console.ReadLine(), out int result );
             RandomName rn = new RandomName();
+            // Springt in die Methode mit eingabe als int 
             rn.PersonGenerator( result );
 
-            foreach( var item in rn.PersonList)
+            // Läuft die Abfrage solange durch bis er kein leerzeichen eingibt
+            do
             {
-                Console.WriteLine(item);
-            }
-            Console.ReadKey();
+                // Läuft die Liste durch mit den erzeugen Personen und zeigt sie an 
+                foreach( var item in rn.PersonList )
+                {
+                    Console.WriteLine( item );
+                }
+                Console.WriteLine( "\n\n" );
+                Console.WriteLine("Welche Person woll sie finden" );
+                searchPerson = Console.ReadLine();
 
+                //Läuft die Liste durch und sucht sich die Personen raus welche mit den gesuchten Namen Starten 
+                foreach( String item in rn.PersonList.Where( x => x.StartsWith( searchPerson ) ) )
+                {
+                    Console.WriteLine( item );
+                }
+
+                Console.WriteLine("\n\n");
+            } while( !string.IsNullOrWhiteSpace( searchPerson ) );
+            Console.Read();
         }
     }
 }
