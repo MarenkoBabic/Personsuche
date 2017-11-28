@@ -11,32 +11,18 @@ namespace PersonenSuchen
     {
         static void Main( string[] args )
         {
-            RandomName Name = new RandomName();
-            List<RandomName> list = new List<RandomName>();
             Console.WriteLine( "Guten Tag" );
             Console.WriteLine( "Wieviele Personen Personen wollen sie erstellen" );
             bool eingabe = int.TryParse( Console.ReadLine(), out int result );
-            for( int i = 0; i < result; i++ )
+            RandomName rn = new RandomName();
+            rn.PersonGenerator( result );
+
+            foreach( var item in rn.PersonList)
             {
-                Name.FirstName();
-                Name.Lastname();
-                Name.Date();
-                list.Add( Name );
+                Console.WriteLine(item);
             }
-            foreach( var item in list )
-            {
-                Console.WriteLine( item );
-            }
-            Console.WriteLine();
-            Console.WriteLine( "Person suchen" );
-            string personenSuche = Console.ReadLine();
+            Console.ReadKey();
 
-            var findPerson = list.Where( x =>  x.FirstName);
-
-
-            Console.WriteLine(personenSuche);
-            Console.ReadLine();
         }
-
     }
 }
