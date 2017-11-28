@@ -20,9 +20,12 @@ namespace PersonenSuchen
             // Läuft die Abfrage solange durch bis er kein leerzeichen eingibt
             do
             {
+                Console.ResetColor();
+
                 // Läuft die Liste durch mit den erzeugen Personen und zeigt sie an 
                 foreach( String item in rn.PersonList )
                 {
+
                     Console.WriteLine( item );
                 }
                 Console.WriteLine( "\n\n" );
@@ -32,9 +35,11 @@ namespace PersonenSuchen
                 //Läuft die Liste durch und sucht sich die Personen raus welche mit den gesuchten Namen Starten 
                 foreach( String item in rn.PersonList.Where( x => x.StartsWith( searchPerson ) ) )
                 {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                        
                     Console.WriteLine( item );
                 }
-
+                Console.ReadLine();
                 Console.WriteLine("\n\n");
             } while( !string.IsNullOrWhiteSpace( searchPerson ) );
         }
