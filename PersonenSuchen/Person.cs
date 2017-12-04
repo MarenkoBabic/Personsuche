@@ -4,36 +4,63 @@ using System.Linq;
 
 namespace PersonenSuchen
 {
-    enum HairColor { rot, blau, grün, weiß, blond, braun, schwarz }
     public class Person
     {
-        public List<Person> ListPerson { get; set; }
-        Array getColor = Enum.GetValues( typeof( HairColor ) );
-        Random rnd = new Random();
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime Date { get; set; }
-        public Enum Color { get; set; }
-        public Person()
+        public DateTime BirthDay { get; set; }
+        public HairColor HairColor { get; set; }
+
+        public Person( string firstName, string lastName, DateTime birthDay, HairColor hairColor )
         {
-            ListPerson = new List<Person>();
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.BirthDay = birthDay;
+            this.HairColor = hairColor;
+        }
+
+        public override string ToString()
+        {
+            return FirstName + " " + LastName + " " + BirthDay + " " + HairColor;
+        }
+    }
+    public class PersonenVerwaltung
+    {
+        Array getColor = Enum.GetValues( typeof( HairColor ) );
+        Random rnd = new Random();
+
+        public List<Person> ListPerson { get; set; }
+
+        public List<Person> GefiltertePersonen { get; set; }
+
+        public List<Person> SucheNachHaarfarbe( HairColor hairColor )
+        {
+            // Suche nach Personen mit der Haarfarbe
+
+            return null;
+        }
+
+        public Person SerachPerson( Person person )
+        {
+            //this.Personen ... suche ob Person vorhanden
+            // return gefundene Person
+            return null;
         }
 
         public void GenerateRandomData( int anzahl )
         {
             for( int i = 0; i < anzahl; i++ )
             {
-                Person p = new Person();
-                p.FirstName = firstNameList.OrderBy( x => rnd.Next() ).First();
-                p.LastName = lastNameList.OrderBy( x => rnd.Next() ).First();
-                p.Date = DateTime.Today.AddDays( -rnd.Next( 10 * 365 ) );
-                p.Color = (HairColor)getColor.GetValue( rnd.Next( getColor.Length ) );
-                ListPerson.Add( p );
+                Person person = new Person("","",DateTime.Now,HairColor.blau);
+                person.FirstName= firstNameList.OrderBy( x => rnd.Next() ).First();
+                person.LastName = lastNameList.OrderBy( x => rnd.Next() ).First();
+                person.BirthDay = DateTime.Today.AddDays( -rnd.Next( 10 * 365 ) );
+                person.HairColor = (HairColor)getColor.GetValue( rnd.Next( getColor.Length ) );
+                ListPerson.Add( person );
             }
         }
 
         private List<string> firstNameList = new List<string>() { "Josef", "Sepp", "Hans", "Andi", "Peter", "Robert", "Marenko", "Patrick", "Thomas" };
         private List<string> lastNameList = new List<string>() { "Prethaler", "Pichler", "Eiweck", "Wolfrath", "Ratzenböck", "Babic", "Grewe", "Gajar" };
-
     }
 }
