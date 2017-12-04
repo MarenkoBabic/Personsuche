@@ -9,46 +9,45 @@ namespace UnitTestProject1
     [TestClass]
     public class UnitTest1
     {
+        RandomName rn = new RandomName();
+        
         [TestMethod]
-        public void PersonenSuchenAnzahl()
+        public void PersonenSuchen_ListIsNotNull()
         {
-            RandomName rn = new RandomName();
-            int anzahl = 100;
-            List<string> firstNameList = new List<string>() { "Josef", "Sepp", "Hans", "Andi", "Peter", "Robert", "Marenko", "Patrick", "Thomas" };
-            List<string> lastNameList = new List<string>() { "Prethaler", "Pichler", "Eiweck", "Wolfrath", "Ratzenböck", "Babic", "Grewe", "Gajar" };
-            Random rnd = new Random();
+            //arrange
+            string anzahl = "10000000000000000000";
 
-            for( int i = 0; i < anzahl; i++ )
-            {
-                string firstName = firstNameList.OrderBy( x => rnd.Next() ).First();
-                string lastName = lastNameList.OrderBy( x => rnd.Next() ).First();
-                DateTime date = rn.RandomDate();
-                string Person = firstName + " " + lastName + " " + date.ToString( "dd.MM.yyyy" );
-                rn.PersonList.Add( Person );
-            }
+            //act
+            rn.PersonGenerator( anzahl );
 
-            Assert.AreEqual( rn.PersonList.Count, anzahl );
+            //assert
+            Assert.IsNotNull( rn.PersonList );
+        }
+        [TestMethod]
+        public void PersonenSuchen_AnzahlIsNull()
+        {
+            //arrange
+            string anzahl = null;
+
+            //act
+            rn.PersonGenerator( anzahl );
+
+            //assert
+            Assert.IsNull( anzahl );
         }
 
         [TestMethod]
-        public void PersonSuchenAnzahlIsNull()
+        public void PersonenSuchen_()
         {
-            RandomName rn = new RandomName();
-            int anzahl = 1000000000;
-            List<string> firstNameList = new List<string>() { "Josef", "Sepp", "Hans", "Andi", "Peter", "Robert", "Marenko", "Patrick", "Thomas" };
-            List<string> lastNameList = new List<string>() { "Prethaler", "Pichler", "Eiweck", "Wolfrath", "Ratzenböck", "Babic", "Grewe", "Gajar" };
-            Random rnd = new Random();
+            //arrange
+            string anzahl = null;
+            
+            //act
+            rn.PersonGenerator( anzahl );
 
-            for( int i = 0; i < anzahl; i++ )
-            {
-                string firstName = firstNameList.OrderBy( x => rnd.Next() ).First();
-                string lastName = lastNameList.OrderBy( x => rnd.Next() ).First();
-                DateTime date = rn.RandomDate();
-                string Person = firstName + " " + lastName + " " + date.ToString( "dd.MM.yyyy" );
-                rn.PersonList.Add( Person );
-            }
-
-            Assert.IsNotNull(anzahl);
+            //assert
+            Assert.IsNull( anzahl );
         }
+
     }
 }
